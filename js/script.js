@@ -52,11 +52,13 @@ function titleClickHandler(event) {
 
   const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
-  optTitleListSelector = '.titles';
-  optArticleTagsSelector = '.post-tags .list';
+  optTitleListSelector = '.titles',
+  optArticleTagsSelector = '.post-tags .list',
   optArticleAuthorSelector = '.post-author',
-  
-  
+  optTagsListSelector = '.tags.list',
+  optCloudClassCount = '5',
+  optCloudClassPrefix = 'tag-size-',
+  optAuthorsListSelector = '.author';
 
 
 
@@ -99,7 +101,31 @@ console.log('customSelector');
 
 generateTitleLinks();
 
+function calculateTagsParams(tags){
+  const params = {max: 0, min: 9999};
+    for(let tag in tags){
+      console.log(tag + 'is used' + tags[tag] + 'times');
+      params.max = Math.max(tags[tag], params.max);
+      params.min = Math.min(tags[tag], params.min);
+    }
+    return params;
+}
+function calculateTagClass(count, params){
+  const normalizedCount = count - params.min;
+  const normalizedMax = params.max - params.min;
+  const percentage = normalizedCount / normalizedMax;
+  const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
+  return optCloudClassPrefix + classNumber;
+}
+
+calculateTagClass();
+
+
 function generateTags(){
+
+  /* [NEW] create a new variable allTags with an empty object */
+  let allTags = {};
+
   /* find all articles */
   const articles = document.querySelectorAll(optArticleTagsSelector);
   
@@ -130,12 +156,41 @@ function generateTags(){
 
       /* add generated code to html variable */
   html = html + taglinkHTML;
+
+  /* [NEW] check if this link is NOT already in allTags */
+  if(!allTags.hasOwnProperty(tag)){
+    /* [NEW] add generated code to allTags array */
+    allTags[tag] = 1;
+  } else {
+    allTags[tag]++;
+    
+  }
     /* END LOOP: for each tag */
 }
     /* insert HTML of all the links into the tags wrapper */
   titleList.innerHTML = html;
   /* END LOOP: for every article: */
 }
+
+ /* [NEW] find list of tags in right column */
+ const tagList = document.querySelector(optTagsListSelector);
+ const tagsParams = calculateTagsParams(allTags);
+ console.log('tagsParams', tagsParams)
+ /* [NEW] create variable for all links HTML code */
+ let allTagsHTML = '';
+ /* [NEW] START LOOP: for each tag in allTags */
+ for(let tag in allTags){
+  /* [NEW] generate code of link and add it to allTagsHTML*/
+  allTagsData.tags.push({
+    tag: tag,
+    count: allTags[tag],
+    className: calculateTagClass(allTags[tag], tagsParams)
+  });
+  /* [NEW] END LOOP: for each tag in allTags */
+ }
+ /* [NEW] add html from allTagsHTML to tagList */
+ tagList.innerHTML = allTagsHTML;
+
 }
 generateTags();
 
