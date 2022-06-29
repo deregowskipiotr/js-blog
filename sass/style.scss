@@ -27,6 +27,7 @@ body {
 .container {
   max-width: 1140px;
   margin: 0 auto;
+  grid-template-columns: auto;
 }
 
 .section-title {
@@ -46,14 +47,17 @@ body {
 .wrapper {
   display: flex;
   margin-left: 10px;
+  
 }
 
 .sidebar {
   flex: 1 0 0;
+  
 }
 
 .posts {
   flex: 2 0 0;
+ 
 }
 
 .sidebar, .posts {
@@ -68,6 +72,7 @@ body {
 
 .logo {
   font-family: $font-logo;
+  font-style: italic;
   font-weight: 400;
   font-size: 104px;
   line-height: 1;
