@@ -103,7 +103,7 @@ console.log('customSelector');
     link.addEventListener('click', titleClickHandler);
     console.log(link);
     
-}
+  }
 }
 
 generateTitleLinks();
