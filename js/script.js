@@ -43,16 +43,16 @@ function titleClickHandler(event) {
 
   /* [DONE] get 'href' attribute from the clicked link */
   const articleSelector = clickedElement.getAttribute('href');
-  console.log(articleSelector);
+  console.log('articleSelector:',articleSelector);
 
   /* [DONE] find the correct article using the selector (value of 'href' attribute) */
   const targetArticle = document.querySelector('articleSelector');
-  console.log('targetArticle', targetArticle);
+  console.log('targetArticle:', targetArticle);
 
   /* [DONE] add class 'active' to the correct article */
   targetArticle.classList.add('active');
 
-  console.log('targetArticle', targetArticle);
+  console.log('targetArticle:', targetArticle);
 
 }
 
@@ -71,7 +71,7 @@ function titleClickHandler(event) {
 
   
 function generateTitleLinks(customSelector = '') {  
-console.log('customSelector');
+ console.log('customSelector');
   /* remove contents of titleList*/
   const titleList = document.querySelector(optTitleListSelector);
   titleList.innerHTML = '';
@@ -93,7 +93,7 @@ console.log('customSelector');
   }
 
   /* insert link into titleList*/
-  html = html + linkHTML;
+  
 
   titleList.innerHTML = html;
 
