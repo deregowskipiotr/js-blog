@@ -34,7 +34,7 @@ function titleClickHandler(event) {
 
   /* [DONE] remove class 'active' from all articles */
 
-  const activeArticles = document.querySelectorAll('.post a.active');
+  const activeArticles = document.querySelectorAll('.post.active');
 
   for(let activeArticle of activeArticles) {
    activeArticle.classList.remove('active');
@@ -44,10 +44,10 @@ function titleClickHandler(event) {
 
   /* [DONE] get 'href' attribute from the clicked link */
   const articleSelector = clickedElement.getAttribute('href');
-  console.log('articleSelector:',articleSelector);
+  console.log('articleSelector:', articleSelector);
 
   /* [DONE] find the correct article using the selector (value of 'href' attribute) */
-  const targetArticle = document.querySelector('articleSelector');
+  const targetArticle = document.querySelector(articleSelector);
   console.log('targetArticle:', targetArticle);
 
   /* [DONE] add class 'active' to the correct article */
@@ -79,7 +79,7 @@ function generateTitleLinks(customSelector = '') {
   console.log('titleList');
 
   /*for each article */
-  const articles = document.querySelector(optArticleSelector + customSelector);
+  const articles = document.querySelectorAll(optArticleSelector + customSelector);
   let html = '';
   for(let article of articles) {
   /* get the article ID*/
@@ -87,7 +87,7 @@ function generateTitleLinks(customSelector = '') {
   /*find title element & get title */
   const articleTitle = article.querySelector(optTitleSelector).innerHTML;
   /*create html of the link */
-  const linkHTMLData = {id: articleId, title, articleTitle};
+  const linkHTMLData = {id: articleId, title: articleTitle};
   const linkHTML = templates.articleLink(linkHTMLData);
   console.log('linkHtml', linkHTML);
   html = html + linkHTML;
@@ -126,7 +126,7 @@ function calculateTagClass(count, params){
   return optCloudClassPrefix + classNumber;
 }
 
-calculateTagClass();
+//calculateTagClass();
 
 
 function generateTags(){
@@ -201,7 +201,7 @@ function generateTags(){
  console.log(allTagsData);
 
 }
-generateTags();
+//generateTags();
 
 function tagClickHandler(event){
   /* prevent default action for this event */
@@ -312,7 +312,7 @@ function generateAuthors(){
  
 }
 
-generateAuthors()
+//generateAuthors()
 
 
 function addClickListenersToAuthors(){
@@ -358,4 +358,4 @@ function authorClickHandler(event){
   generateTitleLinks('[data-author="' + tag + '"]');
 }
 
-authorClickHandler();
+//uthorClickHandler();
