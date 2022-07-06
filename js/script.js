@@ -126,7 +126,7 @@ function calculateTagClass(count, params){
   return optCloudClassPrefix + classNumber;
 }
 
-//calculateTagClass();
+calculateTagClass();
 
 
 function generateTags(){
@@ -201,7 +201,7 @@ function generateTags(){
  console.log(allTagsData);
 
 }
-//generateTags();
+generateTags();
 
 function tagClickHandler(event){
   /* prevent default action for this event */
